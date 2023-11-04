@@ -1,12 +1,11 @@
-
+import Body from "./components/Body";
 
 function App() {
-
   return (
     <>
-     <div className="text-3xl text-blue-900">aditya jain</div>
+      <Body />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

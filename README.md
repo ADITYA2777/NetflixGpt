@@ -2,7 +2,13 @@
 
 -install Vite
 -configured tailwindCss
-
+-Header
+-Routing of App
+-Login From
+-Sign In
+-Sign Up 
+-From validation
+- UseRef Hook 
 
 
 
