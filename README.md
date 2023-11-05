@@ -9,6 +9,9 @@
 -Sign Up 
 -From validation
 - UseRef Hook 
+- Firebase Setup
+- Deploying our app to production 
+- Create SignUp User Account 
 
 
 

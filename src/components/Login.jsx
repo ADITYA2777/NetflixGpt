@@ -1,8 +1,56 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Header from "./Header";
+import { emailCheckerHandler } from "../../utils/Valdation";
+import { auth } from "../../utils/Firbase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
-  const [isSignInFrom, SetIsSignInfrom] = useState(true);
+    const [isSignInFrom, SetIsSignInfrom] = useState(true);
+    const [errorMessage,setErrorMessage]= useState(null)
+
+  const fullname = useRef(null);
+  const email = useRef(null);
+  const password = useRef(null);
+
+   const handlerButtonClick = () => {
+     const emailValue = email.current ? email.current.value : "";
+     const passwordValue = password.current ? password.current.value : "";
+     const fullnameValue = fullname.current ? fullname.current.value : "";
+
+     const message = emailCheckerHandler(
+       emailValue,
+       passwordValue,
+       fullnameValue
+     );
+     setErrorMessage(message);
+
+     if (message) return;
+
+     if (!isSignInFrom) {
+       // sign Up Logic
+       createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
+     }
+     else {
+      //   sign In Logic
+     }
+
+   };
+
+
+
 
   const toggelSignhandlerMenu = () => {
     SetIsSignInfrom(!isSignInFrom);
@@ -17,6 +65,9 @@ const Login = () => {
         />
       </div>
       <form
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
         className=" w-3/12 p-12 absolute text-white 
        bg-black/[0.8] my-36 mx-auto left-0 right-0 rounded-lg "
       >
@@ -25,27 +76,34 @@ const Login = () => {
         </h1>
         {!isSignInFrom && (
           <input
+            ref={fullname}
             type="text"
             placeholder="Enter Your FullName"
             className="p-2 my-4 w-full bg-gray-900"
           />
         )}
         <input
+          ref={email}
           type="text"
           placeholder="Email Address"
           className="p-2 my-4 w-full bg-gray-900"
         />
         <input
+          ref={password}
           type="password"
           placeholder="Password"
           className="p-2 my-4 w-full bg-gray-900"
         />
-        <button className="p-4 my-6 bg-red-700 w-full rounded-lg">
+        <p className="text-lg text-red-500 font-bold py-2">{errorMessage}</p>
+        <button
+          onClick={handlerButtonClick}
+          className="p-4 my-6 bg-red-700 w-full rounded-lg"
+        >
           {isSignInFrom ? "Sign In" : "Sign Up"}
         </button>
         <p className="py-4 ">
           {isSignInFrom ? (
-            <p>
+            <>
               New to Netflix ?
               <span
                 onClick={toggelSignhandlerMenu}
@@ -53,17 +111,17 @@ const Login = () => {
               >
                 Sign Up Now
               </span>
-            </p>
+            </>
           ) : (
-            <p>
-              Already registered ?  
+            <>
+              Already registered ?
               <span
                 onClick={toggelSignhandlerMenu}
                 className="cursor-pointer text-blue-600/[0.5] hover:underline"
               >
                 Sign Up Now
               </span>
-            </p>
+            </>
           )}
         </p>
       </form>
