@@ -2,12 +2,21 @@ import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { emailCheckerHandler } from "../../utils/Valdation";
 import { auth } from "../../utils/Firbase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword, 
+  updateProfile,
+} from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../utils/AppSlices";
 
 const Login = () => {
+  const dispatch = useDispatch()
     const [isSignInFrom, SetIsSignInfrom] = useState(true);
     const [errorMessage,setErrorMessage]= useState(null)
-
+  const navigate = useNavigate() 
+  
   const fullname = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
@@ -15,12 +24,11 @@ const Login = () => {
    const handlerButtonClick = () => {
      const emailValue = email.current ? email.current.value : "";
      const passwordValue = password.current ? password.current.value : "";
-     const fullnameValue = fullname.current ? fullname.current.value : "";
+    //  const fullnameValue = fullname.current ? fullname.current.value : "";
 
      const message = emailCheckerHandler(
        emailValue,
        passwordValue,
-       fullnameValue
      );
      setErrorMessage(message);
 
@@ -29,13 +37,31 @@ const Login = () => {
      if (!isSignInFrom) {
        // sign Up Logic
        createUserWithEmailAndPassword(
-        auth,
+         auth,
         email.current.value,
-        password.current.value
+         password.current.value
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user);
+          updateProfile(user, {
+            displayName: fullname.current.value,
+            photoURL: "https://avatars.githubusercontent.com/u/124715616?v=4",
+          })
+            .then(() => {
+               const { uid, email, displayName, photoURL } = auth.currentUser;
+               dispatch(
+                 addUser({
+                   uid: uid,
+                   email: email,
+                   displayName: displayName,
+                   photoURL: photoURL,
+                 })
+               );
+              navigate("/browse");
+            })
+            .catch((error) => {
+             setErrorMessage(error.message)
+            });
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -44,7 +70,23 @@ const Login = () => {
         });
      }
      else {
-      //   sign In Logic
+       //   sign In Logic
+       signInWithEmailAndPassword(
+         auth,
+         email.current.value,
+         password.current.value
+       )
+         .then((userCredential) => {
+           const user = userCredential.user;
+           console.log(user);
+           navigate("/browse");
+         })
+         .catch((error) => {
+           const errorCode = error.code;
+           const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+         });
+
      }
 
    };
