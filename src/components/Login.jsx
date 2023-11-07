@@ -7,25 +7,23 @@ import {
   signInWithEmailAndPassword, 
   updateProfile,
 } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../utils/AppSlices";
+import { USER_AVATAR } from "../../utils/Constants";
 
 const Login = () => {
   const dispatch = useDispatch()
     const [isSignInFrom, SetIsSignInfrom] = useState(true);
     const [errorMessage,setErrorMessage]= useState(null)
-  const navigate = useNavigate() 
   
-  const fullname = useRef(null);
+  const fullName = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
 
    const handlerButtonClick = () => {
      const emailValue = email.current ? email.current.value : "";
      const passwordValue = password.current ? password.current.value : "";
-    //  const fullnameValue = fullname.current ? fullname.current.value : "";
-
+    //  const fullName = fullName.current ? fullName.current.value : "";
      const message = emailCheckerHandler(
        emailValue,
        passwordValue,
@@ -44,23 +42,22 @@ const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           updateProfile(user, {
-            displayName: fullname.current.value,
-            photoURL: "https://avatars.githubusercontent.com/u/124715616?v=4",
+            displayName: fullName?.current?.value,
+            photoURL:USER_AVATAR ,
           })
             .then(() => {
-               const { uid, email, displayName, photoURL } = auth.currentUser;
-               dispatch(
-                 addUser({
-                   uid: uid,
-                   email: email,
-                   displayName: displayName,
-                   photoURL: photoURL,
-                 })
-               );
-              navigate("/browse");
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
             })
             .catch((error) => {
-             setErrorMessage(error.message)
+              setErrorMessage(error.message);
             });
         })
         .catch((error) => {
@@ -78,21 +75,14 @@ const Login = () => {
        )
          .then((userCredential) => {
            const user = userCredential.user;
-           console.log(user);
-           navigate("/browse");
          })
          .catch((error) => {
            const errorCode = error.code;
            const errorMessage = error.message;
           setErrorMessage(errorCode + "-" + errorMessage);
          });
-
      }
-
    };
-
-
-
 
   const toggelSignhandlerMenu = () => {
     SetIsSignInfrom(!isSignInFrom);
@@ -118,7 +108,7 @@ const Login = () => {
         </h1>
         {!isSignInFrom && (
           <input
-            ref={fullname}
+            ref={fullName}
             type="text"
             placeholder="Enter Your FullName"
             className="p-2 my-4 w-full bg-gray-900"
