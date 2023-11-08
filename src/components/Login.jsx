@@ -36,8 +36,8 @@ const Login = () => {
        // sign Up Logic
        createUserWithEmailAndPassword(
          auth,
-        email.current.value,
-         password.current.value
+        emailValue,
+         passwordValue
       )
         .then((userCredential) => {
           const user = userCredential.user;

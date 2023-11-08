@@ -20,6 +20,8 @@
 - BugFix: If this user is not logged in Redirect/ browse to Login Page and Vice-Versa
 - Unsubscibed  to the onAuthStateChanged Callback
 - Add HardCode  Value to the Constants Files.. 
+- Regiter TMDB Api & Create an app & get access token..
+- GET Data from TMDB Now playing Movies List Api..
 
 
 
