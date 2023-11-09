@@ -22,6 +22,14 @@
 - Add HardCode  Value to the Constants Files.. 
 - Regiter TMDB Api & Create an app & get access token..
 - GET Data from TMDB Now playing Movies List Api..
+- Custom Hooks for TrailerMoive 
+- Create MoiveSlices
+- Updating the store with Moive data
+- Planning for MainConatainer or Secondary Conatiner
+- Fetch data for Tralier Vedio
+- Embedded  the YouTube Vedio & make it AutoPlay and mute
+- Tailwind CSS to Make mainContainer looks awesome..
+- Build the Secondary Componets 
 
 
 
