@@ -29,7 +29,14 @@
 - Fetch data for Tralier Vedio
 - Embedded  the YouTube Vedio & make it AutoPlay and mute
 - Tailwind CSS to Make mainContainer looks awesome..
-- Build the Secondary Componets 
+- Build the Secondary Component
+- Build MovieList..
+- Build MovieCard.. 
+- TMDB Image CDN URl
+- Made the browsre page amazing with the TailwindCss
+- Use PopularMovies Custom
+- Use TrendingMovies Custom
+- Use UpcomingMovies Custom
 
 
 
