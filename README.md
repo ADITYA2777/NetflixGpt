@@ -37,6 +37,10 @@
 - Use PopularMovies Custom
 - Use TrendingMovies Custom
 - Use UpcomingMovies Custom
+- GPT Search Page 
+- Gpt Search Bar
+- (FEATURE) Multi-Language Feature in our app..
+
 
 
 
