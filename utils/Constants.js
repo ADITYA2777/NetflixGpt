@@ -13,13 +13,10 @@ export const API_OPTIONS = {
   },
 };
 
-export const IMAGE_CDN_URl =
-  "https://image.tmdb.org/t/p/w500";
+export const IMAGE_CDN_URl = "https://image.tmdb.org/t/p/w500";
 
-
-  export const BG_URl =
+export const BG_URl =
   "https://assets.nflxext.com/ffe/siteui/vlv3/ab4b0b22-2ddf-4d48-ae88-c201ae0267e2/0efe6360-4f6d-4b10-beb6-81e0762cfe81/IN-en-20231030-popsignuptwoweeks-perspective_alpha_website_medium.jpg";
-    
 
 export const SUPPORTED_LANGUAGES = [
   { identifier: "en", name: "English" },
@@ -28,4 +25,4 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "korea", name: "Korea" },
 ];
 
-export const OPEN_KEY = "sk - h5MvcnRt857fZM9yXka3T3BlbkFJx1ArFpFgSkE0CNjCg4Sa";
+export const OPEN_KEY = "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";
