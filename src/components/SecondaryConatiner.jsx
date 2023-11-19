@@ -7,7 +7,7 @@ const SecondaryConatiner = () => {
   return (
     movies.nowPlayingMoive && (
       <div className="bg-black">
-        <div className="-mt-52 pt-12 pl-10 relative z-20">
+        <div className="mt-0 md:-mt-52 md:pt-12 pl-4 md:pl-10 relative z-20">
           <MoiveLists titles={"Now Playing"} movies={movies?.nowPlayingMoive} />
           <MoiveLists titles={"Trending"} movies={movies?.TrendingMovies} />
           <MoiveLists titles={"Popular"} movies={movies?.MoviesPopular} />
@@ -21,4 +21,4 @@ const SecondaryConatiner = () => {
   );
 }
 
-export default SecondaryConatiner
+export default SecondaryConatiner 

@@ -6,7 +6,7 @@ const MoiveLists = ({ titles, movies }) => {
     // console.log(movies);
   return (
     <div className="px-6 ">
-      <h1 className="flex text-3xl py-4 text-white">{titles}</h1>
+      <h1 className="flex text-lg md:text-3xl py-4 text-white">{titles}</h1>
       <div className="flex  overflow-x-scroll hide-scrollbar ">
         <div className="flex">
           {movies?.map((movie) => (
