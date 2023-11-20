@@ -60,7 +60,7 @@ const Header = () => {
     >
       <img className="w-44 mx-auto md:mx-0" src={LOGOURL} alt="logo" />
       {user && (
-        <div className="flex p-2 items-center ">
+        <div className="flex p-2 items-center justify-between ">
           {showGptSearch && (
             <select
               className="p-2 bg-slate-800 text-white font-bold"
@@ -79,7 +79,11 @@ const Header = () => {
           >
             {showGptSearch ? "Home Page" : " GPT Search"}
           </button>
-          <img className="h-12 w-12" alt="icon" src={user?.photoURL} />
+          <img
+            className="hidden md:block h-12 w-12"
+            alt="icon"
+            src={user?.photoURL}
+          />
           <button
             className="font-bold text-white p-2 m-2 bg-slate-800 rounded-xl   cursor-pointer hover:bg-red-600"
             onClick={handlerSignOut}

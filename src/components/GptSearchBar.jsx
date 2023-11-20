@@ -1,73 +1,3 @@
-// import React, { useRef } from "react";
-// import lang from "../../utils/LanguageConstants";
-// import { useSelector } from "react-redux";
-// import openai from "../../utils/Openai";
-// import { API_OPTIONS } from "../../utils/Constants";
-
-// const GptSearchBar = () => {
-//   const changeLang = useSelector((store) => store.config.lang);
-//   const searchText = useRef(null);
-
-//   const SearchMoviesTMDB = async (movie) => {
-//     const data = await fetch(
-//       "https://api.themoviedb.org/3/search/movie?query" +
-//       movie +
-//       "&include_adult=false&language=en-US&page=1",
-//       API_OPTIONS
-//     );
-//     const json = await data.json()
-//    return(json.results);
-
-//   }
-
-//   const handlerGptSearchClick = async () => {
-//     console.log(searchText.current.value);
-
-//     // Make an api call to gpt api and get movie results
-
-//     const gptQuery =
-//       "Act as a movies  recommendation system and suggestion some movies for the query:" +
-//       searchText.current.value +
-//       " .only give me names of 5 movies ,commna saperated lile the example results given ahead. Example Results : Sholay, Don ,Hum Sath sath hai,Golmaal ,Pk";
-
-//     const gptResults = await openai.chat.completions.create({
-//       messages: [{ role: "user", content: gptQuery }],
-//       model: "gpt-3.5-turbo",
-//     });
-
-//     if (!gptResults.choices) {
-//       console.error(error.message);
-//     }
-//     console.log(gptMovies  );
-
-//     const gptMovies = gptResults.choices?.[0]?.message?.content.split(",")
-//   };
-
-//   return (
-//     <div className=" pt-[10%] flex justify-center">
-//       <from
-//         className="w-1/2 bg-black grid grid-cols-12 "
-//         onSubmit={(e) => e.preventDefault()}
-//       >
-//         <input
-//           ref={searchText}
-//           type="text"
-//           className=" p-4 m-4  col-span-9"
-//           placeholder={lang[changeLang].gptSearchPlaceHolder}
-//         />
-//         <button
-//           className="col-span-3 bg-red-700 text-white text-2xl py-2 px-4 m-4 rounded-lg"
-//           onClick={handlerGptSearchClick}
-//         >
-//           {lang[changeLang].search}
-//         </button>
-//       </from>
-//     </div>
-//   );
-// };
-
-// export default GptSearchBar;
-
 import React, { useRef } from "react";
 import lang from "../../utils/LanguageConstants";
 import { useDispatch, useSelector } from "react-redux";
@@ -124,7 +54,7 @@ const GptSearchBar = () => {
   };
 
   return (
-    <div className=" pt-[40%]  md:pt-[10%] flex justify-center">
+    <div className="pt-[50%] md:pt-[10%] flex justify-center">
       <form
         className=" w-full md:w-1/2 bg-black grid grid-cols-12"
         onSubmit={(e) => e.preventDefault()}
@@ -136,7 +66,7 @@ const GptSearchBar = () => {
           placeholder={lang[changeLang].gptSearchPlaceHolder}
         />
         <button
-          className="col-span-3 bg-red-700 text-white text-2xl py-2 px-4 m-4 rounded-lg"
+          className="col-span-3 bg-red-700 text-white  text-xl md:text-2xl  py-2 md:px-4 m-4 ml-2 rounded-lg"
           onClick={handlerGptSearchClick}
         >
           {lang[changeLang].search}

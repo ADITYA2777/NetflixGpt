@@ -90,8 +90,9 @@ const Login = () => {
   return (
     <div>
       <Header />
-      <div className="absolute">
+      <div className="absolute top-0 left-0 w-full h-full">
         <img
+          className="w-full h-full object-cover"
           src={BG_URl}
           alt="netflix-bg"
         />
@@ -100,10 +101,10 @@ const Login = () => {
         onSubmit={(e) => {
           e.preventDefault();
         }}
-        className=" w-3/12 p-12 absolute text-white 
+        className=" w-full md:w-3/12 px-32 md:p-12  absolute text-white 
        bg-black/[0.8] my-36 mx-auto left-0 right-0 rounded-lg "
       >
-        <h1 className="text-3xl font-bold py-4">
+        <h1 className="text-2xl md:text-3xl font-bold py-4">
           {isSignInFrom ? "Sign In" : "Sign Up"}
         </h1>
         {!isSignInFrom && (

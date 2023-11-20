@@ -1,5 +1,3 @@
-
-
 export const LOGOURL =
   "https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png";
 
@@ -27,4 +25,4 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "korea", name: "Korea" },
 ];
 
-export const OPEN_KEY = "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";
+export const OPEN_KEY = "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";
