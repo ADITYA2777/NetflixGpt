@@ -1,12 +1,15 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import lang from "../../utils/LanguageConstants";
 import { useDispatch, useSelector } from "react-redux";
 import openai from "../../utils/Openai";
 import { API_OPTIONS } from "../../utils/Constants";
 import { addGptMoviesResults } from "../../utils/GptSlices";
+import ShimmerEffect from "./ShimmerEffect";
 
 const GptSearchBar = () => {
+
   const dispatch = useDispatch()
+  const [isLoading, setIsLoading] = useState(false);
   const changeLang = useSelector((store) => store.config.lang);
   const searchText = useRef(null);
 
@@ -31,6 +34,8 @@ const GptSearchBar = () => {
       ". Only give me names of 5 movies, comma separated like the example results given ahead. Example Results: Sholay, Don, Hum Sath Sath Hai, Golmaal, Pk";
 
     try {
+      setIsLoading(true);
+
       const gptResults = await openai.chat.completions.create({
         messages: [{ role: "user", content: gptQuery }],
         model: "gpt-3.5-turbo",
@@ -41,15 +46,25 @@ const GptSearchBar = () => {
         const gptMovies = gptResults.choices[0].message.content.split(",");
         console.log(gptMovies);
 
-        const promiseArray = gptMovies.map((movie) => SearchMoviesTMDB(movie))
-        
-        const tmdbResults = await Promise.all(promiseArray)
+        const promiseArray = gptMovies.map((movie) => SearchMoviesTMDB(movie));
+
+        const tmdbResults = await Promise.all(promiseArray);
         console.log(tmdbResults);
 
-           dispatch(addGptMoviesResults({movieNames:gptMovies,moviesResults:tmdbResults}))
+        dispatch(
+          addGptMoviesResults({
+            movieNames: gptMovies,
+            moviesResults: tmdbResults,
+          })
+        );
       }
+      // Clear the input field after making the search
+      searchText.current.value = "";
+      
     } catch (error) {
       console.error(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -71,6 +86,8 @@ const GptSearchBar = () => {
         >
           {lang[changeLang].search}
         </button>
+        {/* Use ShimmerEffect component with conditional rendering */}
+        {isLoading ? <ShimmerEffect/> : null}
       </form>
     </div>
   );

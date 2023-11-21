@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../../utils/AppSlices";
 import { LOGOURL, SUPPORTED_LANGUAGES } from "../../utils/Constants";
-import { toggleGptSearch } from "../../utils/GptSlices";
+import { resetGptData, toggleGptSearch } from "../../utils/GptSlices";
 import { ChangesLanguages } from "../../utils/ConfigAppSlices";
 
 const Header = () => {
@@ -45,6 +45,7 @@ const Header = () => {
   }, []);
 
   const handlerGptSearch = () => {
+    dispatch(resetGptData())
     //  let build Toggle to GptSearch
     dispatch(toggleGptSearch());
   };
