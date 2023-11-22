@@ -10,7 +10,10 @@ const Body = () => {
     },
     {
       path: "/browse",
-      element:<Browse/>,
+      element: <Browse />,
+      children: [
+        
+      ]
     },
   ]);
 
@@ -22,3 +25,5 @@ const Body = () => {
 };
 
 export default Body;
+
+

@@ -25,4 +25,4 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "korea", name: "Korea" },
 ];
 
-// export const OPEN_KEY = "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";
+export const OPEN_KEY = "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";

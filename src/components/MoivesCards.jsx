@@ -12,3 +12,4 @@ const MoivesCards = ({ posterPath }) => {
 };
 
 export default MoivesCards;
+

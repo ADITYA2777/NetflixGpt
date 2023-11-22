@@ -1,6 +1,5 @@
 import React from 'react'
-import MoivesCards from './MoivesCards'
-
+import MoviesCards from './MoivesCards';
 
 const MoiveLists = ({ titles, movies }) => {
     // console.log(movies);
@@ -10,7 +9,7 @@ const MoiveLists = ({ titles, movies }) => {
       <div className="flex  overflow-x-scroll hide-scrollbar ">
         <div className="flex">
           {movies?.map((movie) => (
-            <MoivesCards key={movie.id} posterPath={movie.poster_path} />
+              <MoviesCards key={movie.id} posterPath={movie.poster_path} />
           ))}
         </div>
       </div>
@@ -19,3 +18,7 @@ const MoiveLists = ({ titles, movies }) => {
 }
 
 export default MoiveLists
+
+
+
+
